@@ -13,19 +13,27 @@ describe('To Do List App', function () {
     browser.executeScript('window.localStorage.clear();');
 });
 
-  //Defines functino to add a new item to the list
+  //Defines function to add a new item to the list
   function addItem(name) {
     element(by.model('newTodo')).sendKeys(name).sendKeys(protractor.Key.ENTER);
+     
   };
 
+  // Defines function to find item in list
+  function findItem(name) {
+    return element.all(by.repeater('todo in todos')).filter(function (elem, index) {
+      return elem.getText().then(function (text) {
+        return text === name;
+      });
+    }).first();
+
+  };
   //Defines function to complete item in list
+  function completeItem(name) {
+    let item = findItem(name);
+    item.element(by.model('todo.completed')).click();
 
-
-
-
-
-
-  
+  };
 
   it('should add item to todo list', function () {
     addItem('Buy Milk');
@@ -40,30 +48,23 @@ describe('To Do List App', function () {
 
   it('should mark an item as complete', function () {
     addItem('Buy Chocolate'); 
-
-    //Find a specific item in to do list
-    let item = element.all(by.repeater('todo in todos')).filter(function (elem, index) {
-      return elem.getText().then(function (text) {
-        return text === 'Buy Chocolate';
-      });
-    }).first();
-
-    //Find and click checkbox next to item in to do list
-    item.element(by.model('todo.completed')).click();
-
-    //Confirm item is marked as complete
+    completeItem('Buy Chocolate');
+    let item = findItem('Buy chocolate');
     expect(item.getAttribute('class')).toEqual('ng-scope completed');
 
   });
 
   it('should see completed to do list', function () {
     addItem('Go to hairdressers');
+    completeItem('Go to hairdressers');
 
     //Opens completed list 
     let completed = element(by.linkText('Completed'))
     completed.click();
 
-    //Verifies 
+    //Verifies item is in completed to do list
+    let items = element.all(by.repeater('todo in todos'));
+    expect(items.getText()).toEqual(['Go to hairdressers']);
 
   });
 
