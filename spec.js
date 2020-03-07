@@ -7,9 +7,28 @@ describe('To Do List App', function () {
     browser.get(url);
   });
 
+  //Reset browser between test cases
+  afterEach(function() {
+    browser.executeScript('window.sessionStorage.clear();');
+    browser.executeScript('window.localStorage.clear();');
+});
+
+  //Defines functino to add a new item to the list
+  function addItem(name) {
+    element(by.model('newTodo')).sendKeys(name).sendKeys(protractor.Key.ENTER);
+  };
+
+  //Defines function to complete item in list
+
+
+
+
+
+
+  
+
   it('should add item to todo list', function () {
-    //Add a new item to the list
-    element(by.model('newTodo')).sendKeys('Buy Milk').sendKeys(protractor.Key.ENTER);
+    addItem('Buy Milk');
 
     //Find item/s in to do list
     let items = element.all(by.className('todo-list')).all(by.className('ng-binding'));
@@ -20,8 +39,7 @@ describe('To Do List App', function () {
   });
 
   it('should mark an item as complete', function () {
-    //Add a new item to the list if required
-    element(by.model('newTodo')).sendKeys('Buy Chocolate').sendKeys(protractor.Key.ENTER);
+    addItem('Buy Chocolate'); 
 
     //Find a specific item in to do list
     let item = element.all(by.repeater('todo in todos')).filter(function (elem, index) {
@@ -31,11 +49,24 @@ describe('To Do List App', function () {
     }).first();
 
     //Find and click checkbox next to item in to do list
-    item.element(by.model('todo.completed')).click(); 
-    browser.sleep(3000);
+    item.element(by.model('todo.completed')).click();
 
     //Confirm item is marked as complete
     expect(item.getAttribute('class')).toEqual('ng-scope completed');
 
   });
+
+  it('should see completed to do list', function () {
+    addItem('Go to hairdressers');
+
+    //Opens completed list 
+    let completed = element(by.linkText('Completed'))
+    completed.click();
+
+    //Verifies 
+
+  });
+
 });
+
+//protractor conf.js --grep='should see completed to do list'
