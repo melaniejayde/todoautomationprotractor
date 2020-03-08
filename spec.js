@@ -109,7 +109,6 @@ describe('To Do List App', function () {
     expect(item.getText()).toEqual('Buy T-Shirt');
 
   });
-
 });
 
 //protractor conf.js --grep='should see all to dos'
