@@ -10,5 +10,22 @@ Test Cases Include:
 * Viewing count of items in todo list
 * Viewing all items in todo list 
 
+### Prerequisites
+This project uses a node.js program Protractor, the Jasmine test framework and a Selenium Server. 
+
+### Installing
+
+To install them, run the following commands:
+
+```
+npm install -g protractor
+webdriver-manager update
+webdriver-manager start
+```
+A [tutorial](http://www.protractortest.org/#/tutorial) can be found on the Protractor website if you get stuck!
+
+### Running the Tests
+
+
 
 
