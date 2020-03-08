@@ -85,6 +85,20 @@ describe('To Do List App', function () {
 
   });
 
+  it('should see count of remaining to do items', function() {
+    addItem('Mow Lawn');
+    addItem('Do Groceries');
+
+    //Opens link to active items in to do list
+    let active = element(by.linkText('Active'))
+    active.click();
+
+    //Check the count shows x items
+    let count = element.all(by.className('todo-count')).all(by.className('ng-binding'));
+    expect(count.getText()).toEqual(['2']);
+  
+  });
+
 });
 
-//protractor conf.js --grep='should mark an item as complete'
+//protractor conf.js --grep='should see count of remaining to do items'
