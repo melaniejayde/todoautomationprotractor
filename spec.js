@@ -99,6 +99,17 @@ describe('To Do List App', function () {
   
   });
 
+  it('should see all to dos', function() {
+    addItem('Buy T-Shirt');
+
+    //Opens link to active items in to do list
+    let all = element(by.linkText('All'));
+    all.click();
+    item = findItem('Buy T-Shirt');
+    expect(item.getText()).toEqual('Buy T-Shirt');
+
+  });
+
 });
 
-//protractor conf.js --grep='should see count of remaining to do items'
+//protractor conf.js --grep='should see all to dos'
