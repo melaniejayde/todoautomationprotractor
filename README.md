@@ -25,7 +25,11 @@ webdriver-manager start
 A [tutorial](http://www.protractortest.org/#/tutorial) can be found on the Protractor website if you get stuck!
 
 ### Running the Tests
-
-
-
-
+To run the tests, simply run the following command: 
+```
+protractor conf.js
+```
+To run only one test scenario, run the following command: 
+```
+protractor conf.js --grep='insert test case name here'
+```
