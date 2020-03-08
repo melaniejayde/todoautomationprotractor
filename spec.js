@@ -35,6 +35,13 @@ describe('To Do List App', function () {
 
   };
 
+  //Defines function to delete item in list
+  function deleteItem(name) {
+    let item = findItem(name);
+    browser.actions().mouseMove(item).perform(); // Mouseover item because the delete button isn't visible yet
+    item.element(by.css('[ng-click="removeTodo(todo)"]')).click();
+  };
+
   it('should add item to todo list', function () {
     addItem('Buy Milk');
 
@@ -49,7 +56,7 @@ describe('To Do List App', function () {
   it('should mark an item as complete', function () {
     addItem('Buy Chocolate'); 
     completeItem('Buy Chocolate');
-    let item = findItem('Buy chocolate');
+    let item = findItem('Buy Chocolate');
     expect(item.getAttribute('class')).toEqual('ng-scope completed');
 
   });
@@ -68,6 +75,16 @@ describe('To Do List App', function () {
 
   });
 
+  it('should remove item in to do list', function() {
+    addItem('Buy Coffee');
+    deleteItem('Buy Coffee');
+    let items = element.all(by.repeater('todo in todos'));
+
+    //Verify item was deleted 
+    expect(items.getText()).not.toContain('Buy Coffee');
+
+  });
+
 });
 
-//protractor conf.js --grep='should see completed to do list'
+//protractor conf.js --grep='should mark an item as complete'
