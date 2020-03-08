@@ -1,6 +1,6 @@
 # To Do list Automation - Testing with Protractor
 
-Below lies a project to automate some test cases of an angular web application - [To Do List](http://todomvc.com/examples/angularjs/#/) using an E2E framework [Protractor](http://www.protractortest.org/#/).  
+Below lies a project to automate some test cases of an angular web application - [To Do List](http://todomvc.com/examples/angularjs/#/) - using an E2E framework [Protractor](http://www.protractortest.org/#/).  
 
 Test Cases Include:
 * Adding item to todo list
